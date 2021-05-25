@@ -1,0 +1,16 @@
+{
+  "name": "goplan",
+  "version": "0.0.1",
+  "description": "Event planner",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "cd server && npm run start:dev",
+    "start:client": "cd client && npm start",
+    "serve": "concurrently \"npm:start:server\" \"npm:start:client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
