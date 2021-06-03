@@ -43,8 +43,8 @@ function Login({
           </Grid.Row>
           <Grid.Row>
             <Form size="medium" key="small">
-              <Form.Field width={20}>
-                <Label style={{ marginBottom: '8px' }}>Email</Label>
+              <Form.Field style={{ textAlign: 'left' }}>
+                <label>Email</label>
                 <input
                   onChange={handleEmailChange}
                   value={email}
@@ -53,8 +53,8 @@ function Login({
                   style={{ marginBottom: '10px' }}
                 />
               </Form.Field>
-              <Form.Field width={20}>
-                <Label style={{ marginBottom: '8px' }}>Password</Label>
+              <Form.Field style={{ textAlign: 'left' }}>
+                <label style={{ marginBottom: '8px' }}>Password</label>
                 <input
                   onChange={handlePassChange}
                   type="password"
@@ -62,8 +62,10 @@ function Login({
                   placeholder="*********"
                 />
               </Form.Field>
-              <Button onClick={handleLogin}>Log In</Button>
-              <Button as={NavLink} exact to="/signup">
+              <Button onClick={handleLogin} width={100}>
+                Log In
+              </Button>
+              <Button as={NavLink} exact to="/signup" width={100}>
                 Sign up
               </Button>
             </Form>
