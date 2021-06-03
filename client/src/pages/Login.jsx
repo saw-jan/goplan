@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
   Form,
   Button,
@@ -28,30 +28,30 @@ function Login({
           <Grid.Row style={{ marginTop: '100px' }}>
             <Grid.Column>
               <Header as="h1" textAlign="center">
-                <Image
-                  src="https://www.freeiconspng.com/uploads/letter-d-icon-png-28.png"
-                  centered
-                />
-                aikon Calendar
+                GOPLAN
               </Header>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row style={{ marginTop: '20px' }}>
-            <Grid.Column width={4}>
-              {loginErrorMsg ? (
-                <Message negative>{loginErrorMsg}</Message>
-              ) : null}
-            </Grid.Column>
-          </Grid.Row>
-          {createUserStatus ? (
-            <Grid.Row style={{ marginTop: '20px' }}>
-              <Grid.Column width={4}>
-                <Message positive>{createUserStatus}</Message>
-              </Grid.Column>
-            </Grid.Row>
-          ) : null}
           <Grid.Row>
-            <Form size="medium" key="small">
+            <Form size="medium" key="small" className="go-form login">
+              <Grid.Row style={{ marginBottom: '30px', textAlign: 'left' }}>
+                <h2>Login</h2>
+                <div className="go-divider"></div>
+              </Grid.Row>
+              <Grid.Row style={{ marginBottom: '20px' }}>
+                <Grid.Column width={4}>
+                  {loginErrorMsg ? (
+                    <Message negative>{loginErrorMsg}</Message>
+                  ) : null}
+                </Grid.Column>
+              </Grid.Row>
+              {createUserStatus ? (
+                <Grid.Row style={{ marginBottom: '20px' }}>
+                  <Grid.Column width={4}>
+                    <Message positive>{createUserStatus}</Message>
+                  </Grid.Column>
+                </Grid.Row>
+              ) : null}
               <Form.Field style={{ textAlign: 'left' }}>
                 <label>Email</label>
                 <input
@@ -71,18 +71,15 @@ function Login({
                   placeholder="*********"
                 />
               </Form.Field>
-              <Button onClick={handleLogin} width={100}>
-                Log In
-              </Button>
-              <Button
-                onClick={resetCreateStatus}
-                as={NavLink}
-                exact
-                to="/signup"
-                width={100}
-              >
-                Sign up
-              </Button>
+              <Grid.Row className="btn-row">
+                <Button onClick={handleLogin}>Log In</Button>
+              </Grid.Row>
+              <Grid.Row className="btn-text">
+                New user?&nbsp;
+                <Link onClick={resetCreateStatus} to="/signup">
+                  Signup now
+                </Link>
+              </Grid.Row>
             </Form>
           </Grid.Row>
         </Grid>

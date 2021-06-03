@@ -58,14 +58,55 @@
 }
 
 .background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: url('../images/background.jpeg') no-repeat center center fixed;
   background-size: cover;
   width: 100%;
   height: auto;
   position: fixed;
-  top: 0;
+  top: -200px;
   left: 0;
   bottom: 0;
   right: 0;
   opacity: 0.9 !important;
+}
+
+.go-divider {
+  height: 2px;
+  background: rgba(9, 9, 9, 0.1);
+}
+
+.go-form {
+  background: #fff;
+  padding: 20px;
+  min-width: 350px;
+}
+
+.go-form .btn-row {
+  display: flex;
+  justify-content: stretch;
+}
+
+.go-form .btn-row > .button {
+  width: 100%;
+}
+
+.go-form.login .btn-row > .button:first-child {
+  background: rgb(17, 122, 163);
+  color: #fff;
+}
+
+.go-form.login .btn-text {
+  margin-top: 15px;
+}
+
+.go-form.signup {
+  text-align: left;
+}
+
+.go-form.signup .btn-row > .button {
+  background: rgb(17, 122, 163);
+  color: #fff;
 }
