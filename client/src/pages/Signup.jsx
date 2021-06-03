@@ -10,6 +10,7 @@ import {
   MessageItem,
 } from 'semantic-ui-react'
 import 'src/css/style.css'
+import { Link } from 'react-router-dom'
 
 function Signup({
   createUserErr,
@@ -86,6 +87,10 @@ function Signup({
                   </MessageList>
                 </Message>
                 <Form.Button content="Submit" />
+                <p>
+                  Already have an account?&nbsp;
+                  <Link to="/">Login</Link>
+                </p>
               </Segment>
             </Form>
           </Grid.Column>
