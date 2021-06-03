@@ -9,9 +9,3 @@ export default class MissingEnvVars extends Error {
     }
   }
 }
-
-const bla = new Error()
-bla.message
-
-const fa = new MissingEnvVars()
-fa.message
