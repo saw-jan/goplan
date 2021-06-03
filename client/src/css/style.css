@@ -59,10 +59,13 @@
 
 .background {
   background: url('../images/background.jpeg') no-repeat center center fixed;
-  height: 100%;
-  width: 100%;
-  padding-top: 20px;
   background-size: cover;
-  padding-bottom: 60%;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   opacity: 0.9 !important;
 }
