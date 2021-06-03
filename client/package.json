@@ -1,5 +1,5 @@
 {
-  "name": "goplan-client",
+  "name": "goplan",
   "version": "0.0.1",
   "dependencies": {
     "@stardust-ui/docs-components": "^0.40.0",
