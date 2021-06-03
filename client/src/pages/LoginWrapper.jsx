@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import loginRequest from 'src/api/users/login'
 import { LOGIN_STATUSES } from 'src/api/users/constants'
-import { setLoginErrorMsg } from 'src/store/action-creators/user'
+import {
+  setLoginErrorMsg,
+  setCreateUserStatus,
+} from 'src/store/action-creators/user'
 import 'src/css/style.css'
 import Login from './Login'
 
@@ -13,6 +16,7 @@ function LoginWrapper() {
 
   const userObj = useSelector((state) => state.user)
   const loginErrorMsg = useSelector((state) => state.user.loginErrorMsg)
+  const createUserStatus = useSelector((state) => state.user.createUserStatus)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -28,6 +32,7 @@ function LoginWrapper() {
   }
 
   const handleLogin = () => {
+    dispatch(setCreateUserStatus(null))
     loginRequest(email, password)
   }
 
@@ -38,6 +43,7 @@ function LoginWrapper() {
   return (
     <Login
       loginErrorMsg={loginErrorMsg}
+      createUserStatus={createUserStatus}
       email={email}
       handleEmailChange={handleEmailChange}
       handleLogin={handleLogin}

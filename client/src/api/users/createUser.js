@@ -30,14 +30,12 @@ async function createUser(userObj) {
     return
   }
   if (jsonResp.error) {
-    console.log(jsonResp.error)
     switch (jsonResp.error) {
       case USER_SERVER_ERRORS.USER_EXISTS:
         store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED))
         store.dispatch(
           setCreateUserErrorMsg(CREATE_USER_ERROR_MESSAGES.USER_EXISTS)
         )
-        console.log('Here..')
         return
       default:
         store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED))
@@ -54,10 +52,10 @@ async function createUser(userObj) {
       setCreateUserErrorMsg(CREATE_USER_ERROR_MESSAGES.SERVER_ERROR)
     )
     return
+  } else {
+    store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.SUCCESS))
+    store.dispatch(setCreateUserErrorMsg(null))
   }
-
-  store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.SUCCESS))
-  store.dispatch(setCreateUserErrorMsg(null))
 }
 
 export default createUser

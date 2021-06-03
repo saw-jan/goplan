@@ -7,7 +7,7 @@ const MAX_PW_LEN = 16
 const MIN_PW_LEN = 6
 
 export const LOGIN_STATUSES = {
-  SUCCESS: 'SUCCESS',
+  SUCCESS: 'Sign up successful',
   PENDING: 'PENDING',
   FAILED: 'FAILED',
 }

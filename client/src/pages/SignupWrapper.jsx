@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import createUserRequest from 'src/api/users/createUser'
 import { CREATE_USER_ERROR_MESSAGES } from 'src/api/users/constants'
@@ -88,10 +88,11 @@ function SignupWrapper() {
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isLoggedIn] = useState(false)
   const [errorMsg] = useState(null)
+  const history = useHistory()
 
   const createUserErr = useSelector((state) => state.user.createUserErrorMsg)
+  const createUserStatus = useSelector((state) => state.user.createUserStatus)
   const dispatch = useDispatch()
 
   const handleSignup = () => {
@@ -116,7 +117,11 @@ function SignupWrapper() {
 
   useEffect(() => {
     dispatch(setCreateUserErrorMsg(null))
-  }, [dispatch, firstName, lastName, email, password, isLoggedIn])
+  }, [dispatch])
+
+  useEffect(() => {
+    if (createUserStatus) history.push('/')
+  })
 
   const firstNameChange = (e) => {
     if (errorMsg != null) {
@@ -139,9 +144,6 @@ function SignupWrapper() {
     setPassword(e.target.value)
   }
 
-  if (isLoggedIn) {
-    return <Redirect to="../" />
-  }
   return (
     <Signup
       createUserErr={createUserErr}

@@ -13,6 +13,7 @@ import 'src/css/style.css'
 
 function Login({
   loginErrorMsg,
+  createUserStatus,
   email,
   handleEmailChange,
   password,
@@ -41,6 +42,13 @@ function Login({
               ) : null}
             </Grid.Column>
           </Grid.Row>
+          {createUserStatus ? (
+            <Grid.Row style={{ marginTop: '20px' }}>
+              <Grid.Column width={4}>
+                <Message positive>{createUserStatus}</Message>
+              </Grid.Column>
+            </Grid.Row>
+          ) : null}
           <Grid.Row>
             <Form size="medium" key="small">
               <Form.Field style={{ textAlign: 'left' }}>
@@ -78,6 +86,7 @@ function Login({
 
 Login.propTypes = {
   loginErrorMsg: PropTypes.string.isRequired,
+  createUserStatus: PropTypes.string,
   email: PropTypes.string.isRequired,
   handleEmailChange: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
