@@ -19,3 +19,9 @@ npm run serve
 # OR
 yarn serve
 ```
+
+<hr/>
+Cloned and combined from
+https://github.com/Pickled-Daikon/event-planner
+and https://github.com/Pickled-Daikon/event-planner-server
+for testing purpose
