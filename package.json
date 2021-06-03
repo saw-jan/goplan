@@ -10,7 +10,7 @@
     "start:server": "cd server && npm run start:dev",
     "start:client": "cd client && npm start",
     "serve": "concurrently \"npm:start:server\" \"npm:start:client\"",
-    "test:bdd": "cucumber-js --require cucumber.conf.js --require test/acceptance/stepDefinitions --format @cucumber/pretty-formatter"
+    "test:bdd": "cucumber-js --require cucumber.conf.js --require tests/acceptance/stepDefinitions --format @cucumber/pretty-formatter"
   },
   "author": "",
   "license": "ISC",
