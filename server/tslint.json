@@ -1,10 +1,12 @@
 {
   "defaultSeverity": "error",
   "extends": [
-    "tslint:recommended"
+    "tslint:recommended",
+    "tslint-config-prettier",
+    "tslint-plugin-prettier"
   ],
   "rules": {
-    "trailing-comma": [ false ],
+    "trailing-comma": [false],
     "max-classes-per-file": false
   }
 }
