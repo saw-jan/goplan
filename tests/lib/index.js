@@ -14,14 +14,14 @@ function cleanUpDB() {
     // drop users collection
     db.collection('users').drop(function (e, res) {
       if (e) throw err;
-      if (res) console.log('Event collection cleared');
+      if (res) console.log('Users collection cleared');
       db.close;
     });
 
     // drop events collection
     db.collection('events').drop(function (e, res) {
       if (e) throw err;
-      if (res) console.log('Event collection cleared');
+      if (res) console.log('Events collection cleared');
       db.close;
     });
   });
