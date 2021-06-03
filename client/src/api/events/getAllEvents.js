@@ -1,25 +1,25 @@
-import { getJwtToken } from '../users/jwt';
-import store from 'src/store';
-import { GET_EVENTS_URL } from './constants';
-import { setAllEvents } from 'src/store/action-creators/events';
-import getDateString from './getDateString';
+import { getJwtToken } from '../users/jwt'
+import store from 'src/store'
+import { GET_EVENTS_URL } from './constants'
+import { setAllEvents } from 'src/store/action-creators/events'
+import getDateString from './getDateString'
 /**
  *
  * @param eventObj {{startDateTime: *, name: *, description: *, location: *, endDateTime: *}}
  */
 async function getAllEvents() {
-  const jwtToken = getJwtToken();
-  const user = store.getState().user;
-  let jsonResp = null;
+  const jwtToken = getJwtToken()
+  const user = store.getState().user
+  let jsonResp = null
 
   if (!user) {
-    return;
+    return
   }
 
-  const id = user.id;
+  const id = user.id
   let events = {
     daily: [],
-  };
+  }
 
   try {
     const resp = await fetch(GET_EVENTS_URL, {
@@ -31,35 +31,35 @@ async function getAllEvents() {
       body: JSON.stringify({
         userId: id,
       }),
-    });
-    jsonResp = await resp.json();
-    store.dispatch(setAllEvents(jsonResp.events));
+    })
+    jsonResp = await resp.json()
+    store.dispatch(setAllEvents(jsonResp.events))
   } catch (e) {
-    return;
+    return
   }
 
   if (!jsonResp.events) {
-    return;
+    return
   }
   // get start
   jsonResp.events.forEach((event) => {
-    const date = new Date(event.startDateTime);
-    const dateWithoutTime = getDateString(date);
-    const recurrenceType = event.recurrenceType;
+    const date = new Date(event.startDateTime)
+    const dateWithoutTime = getDateString(date)
+    const recurrenceType = event.recurrenceType
 
     if (recurrenceType === 'daily') {
-      events.daily.push(event);
+      events.daily.push(event)
     } else if (events[dateWithoutTime]) {
-      events[dateWithoutTime].push(event);
+      events[dateWithoutTime].push(event)
     } else {
-      events[dateWithoutTime] = [event];
+      events[dateWithoutTime] = [event]
     }
-  });
+  })
 
-  store.dispatch(setAllEvents(events));
+  store.dispatch(setAllEvents(events))
   // make it an object/
   // call get day
   // add to object
 }
 
-export default getAllEvents;
+export default getAllEvents

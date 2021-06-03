@@ -3,16 +3,16 @@ import {
   CREATE_USER_URL,
   CREATE_USER_ERROR_MESSAGES,
   USER_SERVER_ERRORS,
-} from './constants';
-import store from 'src/store';
+} from './constants'
+import store from 'src/store'
 import {
   setCreateUserErrorMsg,
   setCreateUserStatus,
-} from 'src/store/action-creators/user';
+} from 'src/store/action-creators/user'
 
 async function createUser(userObj) {
-  let jsonResp;
-  store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.PENDING));
+  let jsonResp
+  store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.PENDING))
   try {
     const resp = await fetch(CREATE_USER_URL, {
       method: 'POST',
@@ -20,44 +20,44 @@ async function createUser(userObj) {
         'content-type': 'application/json',
       },
       body: JSON.stringify({ user: userObj }),
-    });
-    jsonResp = await resp.json();
+    })
+    jsonResp = await resp.json()
   } catch (e) {
-    store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED));
+    store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED))
     store.dispatch(
       setCreateUserErrorMsg(CREATE_USER_ERROR_MESSAGES.SERVER_ERROR)
-    );
-    return;
+    )
+    return
   }
   if (jsonResp.error) {
-    console.log(jsonResp.error);
+    console.log(jsonResp.error)
     switch (jsonResp.error) {
       case USER_SERVER_ERRORS.USER_EXISTS:
-        store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED));
+        store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED))
         store.dispatch(
           setCreateUserErrorMsg(CREATE_USER_ERROR_MESSAGES.USER_EXISTS)
-        );
-        console.log('Here..');
-        return;
+        )
+        console.log('Here..')
+        return
       default:
-        store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED));
+        store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED))
         store.dispatch(
           setCreateUserErrorMsg(CREATE_USER_ERROR_MESSAGES.SERVER_ERROR)
-        );
-        return;
+        )
+        return
     }
   }
 
   if (!jsonResp.user) {
-    store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED));
+    store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.FAILED))
     store.dispatch(
       setCreateUserErrorMsg(CREATE_USER_ERROR_MESSAGES.SERVER_ERROR)
-    );
-    return;
+    )
+    return
   }
 
-  store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.SUCCESS));
-  store.dispatch(setCreateUserErrorMsg(null));
+  store.dispatch(setCreateUserStatus(CREATE_USER_STATUSES.SUCCESS))
+  store.dispatch(setCreateUserErrorMsg(null))
 }
 
-export default createUser;
+export default createUser

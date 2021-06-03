@@ -1,33 +1,24 @@
-import React, { useState } from 'react';
-import { DateInput } from 'semantic-ui-calendar-react';
-import { useDispatch, useSelector } from 'react-redux';
+import { DateInput } from 'semantic-ui-calendar-react'
+import { useDispatch, useSelector } from 'react-redux'
+import getDateString from 'src/api/events/getDateString'
+import { setSelectedDate } from 'src/store/action-types/calendar'
+import { setGetEventsPanel } from 'src/store/action-types/panel'
 
-import getDateString from '../api/events/getDateString';
-import { setSelectedDate } from '../store/action-types/calendar';
-import {setGetEventsPanel} from "../store/action-types/panel";
-import getAllEvents from "../api/events/getAllEvents";
-import MainCalendar from '../pages/MainCalendar';
-
-
-const defaultDate = new Date().getDate().toString();
-
-// eslint-disable-next-line react/prop-types
 function Calendar() {
-  const date = useSelector((state) => state.calendar.selectedDate);
-  const dispatch = useDispatch();
-
+  const date = useSelector((state) => state.calendar.selectedDate)
+  const dispatch = useDispatch()
 
   const dateHandler = (event, { value }) => {
-    console.log(value);
-    const [day, month, year] = value.split('-');
-    const dateObj = new Date();
-    dateObj.setFullYear(year);
-    dateObj.setMonth(parseInt(month) - 1);
-    dateObj.setDate(day);
-    dispatch(setGetEventsPanel(true));
-    const dateStr = getDateString(dateObj);
-    dispatch(setSelectedDate(dateStr));
-  };
+    console.log(value)
+    const [day, month, year] = value.split('-')
+    const dateObj = new Date()
+    dateObj.setFullYear(year)
+    dateObj.setMonth(parseInt(month) - 1)
+    dateObj.setDate(day)
+    dispatch(setGetEventsPanel(true))
+    const dateStr = getDateString(dateObj)
+    dispatch(setSelectedDate(dateStr))
+  }
 
   return (
     <>
@@ -40,7 +31,7 @@ function Calendar() {
         onChange={dateHandler}
       />
     </>
-  );
+  )
 }
 
-export default Calendar;
+export default Calendar

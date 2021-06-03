@@ -4,7 +4,7 @@ import {
   SET_CREATED_EVENT,
   SET_ALL_EVENTS,
   SET_IS_RECURRING,
-} from '../action-types/events';
+} from '../action-types/events'
 
 const defaultState = {
   createEventStatus: null,
@@ -12,23 +12,23 @@ const defaultState = {
   createdEvent: null,
   isRecurring: null,
   allEvents: {},
-};
+}
 
 function eventsReducer(state = defaultState, action) {
   switch (action.type) {
     case SET_CREATE_EVENT_STATUS:
-      return { ...state, createEventStatus: action.payload };
+      return { ...state, createEventStatus: action.payload }
     case SET_CREATE_EVENT_ERROR_MSG:
-      return { ...state, createEventErrorMsg: action.payload };
+      return { ...state, createEventErrorMsg: action.payload }
     case SET_CREATED_EVENT:
-      return { ...state, createdEvent: action.payload };
+      return { ...state, createdEvent: action.payload }
     case SET_ALL_EVENTS:
-      return { ...state, allEvents: action.payload };
+      return { ...state, allEvents: action.payload }
     case SET_IS_RECURRING:
-      return { ...state, isRecurring: action.payload };
+      return { ...state, isRecurring: action.payload }
     default:
-      return state;
+      return state
   }
 }
 
-export default eventsReducer;
+export default eventsReducer

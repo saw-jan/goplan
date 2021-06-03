@@ -1,18 +1,18 @@
-import { decodeToken, getJwtToken } from './jwt';
-import store from 'src/store';
-import { setLoginStatus, setUser } from 'src/store/action-creators/user';
-import { LOGIN_STATUSES } from './constants';
+import { decodeToken, getJwtToken } from './jwt'
+import store from 'src/store'
+import { setLoginStatus, setUser } from 'src/store/action-creators/user'
+import { LOGIN_STATUSES } from './constants'
 
 export default function loginWithJwt() {
-  const jwtToken = getJwtToken();
+  const jwtToken = getJwtToken()
   if (!jwtToken) {
-    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-    return;
+    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
+    return
   }
-  const decodedToken = decodeToken(jwtToken);
+  const decodedToken = decodeToken(jwtToken)
   if (!decodedToken) {
-    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-    return;
+    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
+    return
   }
 
   store.dispatch(
@@ -24,6 +24,6 @@ export default function loginWithJwt() {
       email: decodedToken.email,
       isAdmin: decodedToken.isAdmin,
     })
-  );
-  store.dispatch(setLoginStatus(LOGIN_STATUSES.SUCCESS));
+  )
+  store.dispatch(setLoginStatus(LOGIN_STATUSES.SUCCESS))
 }

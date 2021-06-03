@@ -1,18 +1,16 @@
-import {
-  SET_PANEL,
-} from '../action-creators/panel';
+import { SET_PANEL } from '../action-creators/panel'
 
 const defaultState = {
   getEventsPanel: false,
-};
+}
 
 function panelReducer(state = defaultState, action) {
   switch (action.type) {
     case SET_PANEL:
-      return { ...state, getEventsPanel: action.payload };
+      return { ...state, getEventsPanel: action.payload }
     default:
-      return state;
+      return state
   }
 }
 
-export default panelReducer;
+export default panelReducer

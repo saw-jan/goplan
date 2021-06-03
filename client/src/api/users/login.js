@@ -3,20 +3,20 @@ import {
   LOGIN_URL,
   USER_SERVER_ERRORS,
   LOGIN_ERROR_MESSAGE,
-} from './constants';
-import store from 'src/store';
+} from './constants'
+import store from 'src/store'
 import {
   setLoginStatus,
   setLoginErrorMsg,
   setUser,
-} from 'src/store/action-creators/user';
-import { decodeToken, setJwtToken } from './jwt';
+} from 'src/store/action-creators/user'
+import { decodeToken, setJwtToken } from './jwt'
 
 export default async function login(email, password) {
-  let jsonResp;
+  let jsonResp
 
   try {
-    store.dispatch(setLoginStatus(LOGIN_STATUSES.PENDING));
+    store.dispatch(setLoginStatus(LOGIN_STATUSES.PENDING))
     // eslint-disable-next-line no-undef
     const resp = await fetch(LOGIN_URL, {
       method: 'POST',
@@ -29,49 +29,49 @@ export default async function login(email, password) {
           password,
         },
       }),
-    });
-    jsonResp = await resp.json();
+    })
+    jsonResp = await resp.json()
   } catch (e) {
-    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-    store.dispatch(setLoginErrorMsg('Could not connect to the server'));
-    return;
+    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
+    store.dispatch(setLoginErrorMsg('Could not connect to the server'))
+    return
   }
 
   if (jsonResp.error) {
     switch (jsonResp.error) {
       case USER_SERVER_ERRORS.USER_NOT_FOUND:
-        store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-        store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.USER_NOT_FOUND));
-        return;
+        store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
+        store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.USER_NOT_FOUND))
+        return
       case USER_SERVER_ERRORS.INCORRECT_PW:
-        store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-        store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.INCORRECT_PW));
-        return;
+        store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
+        store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.INCORRECT_PW))
+        return
       case USER_SERVER_ERRORS.CREDENTIALS_MISSING:
-        store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
+        store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
         store.dispatch(
           setLoginErrorMsg(LOGIN_ERROR_MESSAGE.CREDENTIALS_MISSING)
-        );
-        return;
+        )
+        return
       default:
-        store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-        store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.SERVER_ERROR));
-        return;
+        store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
+        store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.SERVER_ERROR))
+        return
     }
   }
 
-  const jwtToken = jsonResp.token;
+  const jwtToken = jsonResp.token
   if (!jwtToken) {
-    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-    store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.SERVER_ERROR));
-    return;
+    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
+    store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.SERVER_ERROR))
+    return
   }
 
-  const decodedToken = decodeToken(jwtToken);
+  const decodedToken = decodeToken(jwtToken)
   if (!decodedToken) {
-    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-    store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.SERVER_ERROR));
-    return;
+    store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED))
+    store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.SERVER_ERROR))
+    return
   }
 
   store.dispatch(
@@ -83,8 +83,8 @@ export default async function login(email, password) {
       email: decodedToken.email,
       isAdmin: decodedToken.isAdmin,
     })
-  );
-  store.dispatch(setLoginErrorMsg(null));
-  store.dispatch(setLoginStatus(LOGIN_STATUSES.SUCCESS));
-  setJwtToken(jwtToken);
+  )
+  store.dispatch(setLoginErrorMsg(null))
+  store.dispatch(setLoginStatus(LOGIN_STATUSES.SUCCESS))
+  setJwtToken(jwtToken)
 }

@@ -1,40 +1,37 @@
-import React, { useState } from 'react';
-import { Button, Grid, Menu, Segment, Sidebar } from 'semantic-ui-react';
-import Calendar from '../components/Calendar';
-import NavBar from '../components/NavBar';
-import '../css/style.css';
-import CreateEventWrapper from '../components/CreateEvent/CreateEventWrapper';
-import PropTypes from 'prop-types';
-import GetEvents from '../components/GetEvents';
-import getAllEvents from '../api/events/getAllEvents';
-import { useDispatch, useSelector } from 'react-redux';
-import { setGetEventsPanel } from '../store/action-types/panel';
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
+import { Button, Grid, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import Calendar from 'src/components/Calendar'
+import NavBar from 'src/components/NavBar'
+import CreateEventWrapper from 'src/components/CreateEvent/CreateEventWrapper'
+import GetEvents from 'src/components/GetEvents'
+import getAllEvents from 'src/api/events/getAllEvents'
+import { setGetEventsPanel } from 'src/store/action-types/panel'
+import 'src/css/style.css'
 
 function MainCalendar() {
-  const [showPanelCreate, setShowPanelCreate] = useState(false);
-  const [showPanelGetEvents, setShowPanelGetEvents] = useState(false);
-  const [calendarSize, setCalendarSize] = useState(15);
-  const [buttonSize, setButtonSize] = useState(3);
-  const getPanelStatus = useSelector((state) => state.panel.getEventsPanel);
-  const dispatch = useDispatch();
+  const [showPanelCreate, setShowPanelCreate] = useState(false)
+  const [calendarSize, setCalendarSize] = useState(15)
+  const [buttonSize, setButtonSize] = useState(3)
+  const getPanelStatus = useSelector((state) => state.panel.getEventsPanel)
+  const dispatch = useDispatch()
 
   const handleClosePanel = () => {
-    setShowPanelCreate(false);
-    dispatch(setGetEventsPanel(false));
-    setShowPanelGetEvents(false);
-    setCalendarSize(15);
-    setButtonSize(3);
-  };
+    setShowPanelCreate(false)
+    dispatch(setGetEventsPanel(false))
+    setCalendarSize(15)
+    setButtonSize(3)
+  }
 
   const handleShowPanel = () => {
-    setShowPanelCreate(true);
-    dispatch(setGetEventsPanel(false));
-    setShowPanelGetEvents(false);
-    setCalendarSize(11);
-    setButtonSize(1);
-  };
+    setShowPanelCreate(true)
+    dispatch(setGetEventsPanel(false))
+    setCalendarSize(11)
+    setButtonSize(1)
+  }
 
-  getAllEvents();
+  getAllEvents()
 
   return (
     <>
@@ -43,41 +40,43 @@ function MainCalendar() {
       <Sidebar.Pushable as={Segment}>
         <Sidebar
           as={Menu}
-          animation='push'
-          icon='labeled'
+          animation="push"
+          icon="labeled"
           vertical
           visible={showPanelCreate}
-          width='wide'>
+          width="wide"
+        >
           <Button
             compact
             basic
-            icon='window close'
+            icon="window close"
             onClick={handleClosePanel}
-            floated='right'
-            size='small'
+            floated="right"
+            size="small"
           />
           <CreateEventWrapper />
         </Sidebar>
         <Sidebar
           as={Menu}
-          animation='push'
-          icon='labeled'
-          width='wide'
+          animation="push"
+          icon="labeled"
+          width="wide"
           vertical
-          visible={getPanelStatus}>
+          visible={getPanelStatus}
+        >
           <Button
             compact
             basic
-            icon='window close'
+            icon="window close"
             onClick={handleClosePanel}
-            floated='right'
-            size='small'
+            floated="right"
+            size="small"
           />
           <GetEvents />
         </Sidebar>
 
         <Sidebar.Pusher>
-          <div className='background'>
+          <div className="background">
             <Grid>
               <Grid.Row>
                 <Grid.Column width={buttonSize}>
@@ -95,7 +94,7 @@ function MainCalendar() {
         </Sidebar.Pusher>
       </Sidebar.Pushable>
     </>
-  );
+  )
 }
 
 MainCalendar.propTypes = {
@@ -103,6 +102,6 @@ MainCalendar.propTypes = {
   showPanel: PropTypes.bool.isRequired,
   calendarSize: PropTypes.number.isRequired,
   handleShowPanel: PropTypes.func.isRequired,
-};
+}
 
-export default MainCalendar;
+export default MainCalendar

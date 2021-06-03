@@ -1,3 +1,3 @@
-import CreateEventWrapper from './CreateEventWrapper';
+import CreateEventWrapper from './CreateEventWrapper'
 
-export default CreateEventWrapper;
+export default CreateEventWrapper

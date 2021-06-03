@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import createEventRequest from '../../api/events/createEvent';
-import CreateEvent from './CreateEvent';
-import eventFieldsErrorCheck from './eventFieldsErrorCheck';
-import buildEventObj from './buildEventObj';
-import { setCreatedEvent, setCreateEventErrorMsg, setIsRecurring } from '../../store/action-creators/events';
-import buildRecurringEvent from './buildRecurringEvent';
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import createEventRequest from 'src/api/events/createEvent'
+import { setCreateEventErrorMsg } from 'src/store/action-creators/events'
+import CreateEvent from './CreateEvent'
+import eventFieldsErrorCheck from './eventFieldsErrorCheck'
+import buildEventObj from './buildEventObj'
 
 const DEFAULT_EVENT_FIELDS = {
   name: '',
@@ -17,7 +15,7 @@ const DEFAULT_EVENT_FIELDS = {
   endTime: '',
   userId: '',
   recurrenceType: '',
-};
+}
 
 const recurringOptions = [
   { value: 'none', text: 'None' },
@@ -26,38 +24,39 @@ const recurringOptions = [
   { value: 'biweekly', text: 'Every Two Weeks' },
   { value: 'monthly', text: 'Every Month' },
   { value: 'yearly', text: 'Every Year' },
-];
-
+]
 
 function CreateEventWrapper() {
-  const [eventFields, setEventFields] = useState(DEFAULT_EVENT_FIELDS);
-  const userObj = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  const errorMsg = useSelector((state) => state.events.createEventErrorMsg);
-  const recurring = useSelector((state) => state.events.isRecurring);
-
-  useEffect(() => { setCreateEventErrorMsg(null); }, []);
+  const [eventFields, setEventFields] = useState(DEFAULT_EVENT_FIELDS)
+  const userObj = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+  const errorMsg = useSelector((state) => state.events.createEventErrorMsg)
 
   useEffect(() => {
-    setEventFields({ ...eventFields, userId: userObj.id });
-  }, [userObj, setEventFields]);
+    setCreateEventErrorMsg(null)
+  }, [])
+
+  useEffect(() => {
+    setEventFields({ ...eventFields, userId: userObj.id })
+  }, [userObj, eventFields, setEventFields])
+
   const eventFieldHandler = (event, { name, value }) => {
-    dispatch(setCreateEventErrorMsg(null));
-    setEventFields({ ...eventFields, [name]: value });
-  };
+    dispatch(setCreateEventErrorMsg(null))
+    setEventFields({ ...eventFields, [name]: value })
+  }
 
   const onSubmit = () => {
-    const fieldError = eventFieldsErrorCheck(eventFields);
+    const fieldError = eventFieldsErrorCheck(eventFields)
     if (fieldError) {
-      console.log(fieldError);
-      dispatch(setCreateEventErrorMsg(fieldError));
-      return;
+      console.log(fieldError)
+      dispatch(setCreateEventErrorMsg(fieldError))
+      return
     }
 
-    const eventObj = buildEventObj(eventFields);
+    const eventObj = buildEventObj(eventFields)
 
-    createEventRequest(eventObj);
-  };
+    createEventRequest(eventObj)
+  }
 
   return (
     <CreateEvent
@@ -67,10 +66,9 @@ function CreateEventWrapper() {
       onSubmit={onSubmit}
       recurringOptions={recurringOptions}
     />
-  );
+  )
 }
 
+CreateEventWrapper.propTypes = {}
 
-CreateEventWrapper.propTypes = {};
-
-export default CreateEventWrapper;
+export default CreateEventWrapper

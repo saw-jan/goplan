@@ -2,10 +2,10 @@
   defines functions for the frontend to make requests to the event API.
  */
 
-import { API_ROOT_URL } from './constants';
+import { API_ROOT_URL } from './constants'
 
-export const GET_EVENTS_URL = `${API_ROOT_URL}/events/get`;
-export const CREATE_EVENT_URL = `${API_ROOT_URL}/events/create`;
+export const GET_EVENTS_URL = `${API_ROOT_URL}/events/get`
+export const CREATE_EVENT_URL = `${API_ROOT_URL}/events/create`
 
 /**
  * gets all events
@@ -45,7 +45,7 @@ export const CREATE_EVENT_URL = `${API_ROOT_URL}/events/create`;
  * }>}
  */
 export async function createEvent(eventObj) {
-  let jsonResp;
+  let jsonResp
   try {
     const resp = await fetch(CREATE_EVENT_URL, {
       method: 'POST',
@@ -53,11 +53,11 @@ export async function createEvent(eventObj) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(eventObj),
-    });
+    })
 
-    jsonResp = await resp.json();
-    return jsonResp.event;
+    jsonResp = await resp.json()
+    return jsonResp.event
   } catch (e) {
-    throw new Error('Failed to Create event');
+    throw new Error('Failed to Create event')
   }
 }

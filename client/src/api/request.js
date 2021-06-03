@@ -1,16 +1,16 @@
-import { getJwtToken } from './jwt';
+import { getJwtToken } from './jwt'
 
 export const DEFAULT_HEADERS = {
   headers: {
     'content-type': 'application/json',
   },
-};
+}
 
 export const ERRORS = {
   NO_TOKEN_FOUND: new Error('no JWT token found'),
-};
+}
 
-const DEFAULT_METHOD = 'POST';
+const DEFAULT_METHOD = 'POST'
 
 export async function request(
   url,
@@ -20,7 +20,7 @@ export async function request(
 ) {
   if (method === 'POST' && headers['content-type'] === 'application/json') {
     // eslint-disable-next-line no-param-reassign
-    body = JSON.stringify(body);
+    body = JSON.stringify(body)
   }
 
   // eslint-disable-next-line no-undef
@@ -28,8 +28,8 @@ export async function request(
     method,
     headers,
     body,
-  });
-  return resp.json();
+  })
+  return resp.json()
 }
 
 // eslint-disable-next-line max-len
@@ -39,14 +39,14 @@ export async function protectedRequest(
   headers = DEFAULT_HEADERS,
   method = DEFAULT_HEADERS
 ) {
-  const token = getJwtToken();
+  const token = getJwtToken()
   if (!token) {
-    throw ERRORS.NO_TOKEN_FOUND;
+    throw ERRORS.NO_TOKEN_FOUND
   }
   const protectedHeaders = {
     ...headers,
     authentication: `Bearer ${token}`,
-  };
+  }
 
-  return request(url, body, protectedHeaders, method);
+  return request(url, body, protectedHeaders, method)
 }

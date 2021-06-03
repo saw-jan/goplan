@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import {
   Form,
   Segment,
   Grid,
   Header,
-  Message, MessageHeader, MessageList, MessageItem,
-} from 'semantic-ui-react';
-
-import '../css/style.css';
+  Message,
+  MessageHeader,
+  MessageList,
+  MessageItem,
+} from 'semantic-ui-react'
+import 'src/css/style.css'
 
 function Signup({
-  // eslint-disable-next-line react/prop-types
   createUserErr,
   handleSignup,
   firstName,
@@ -23,6 +23,7 @@ function Signup({
   password,
   passwordChange,
 }) {
+  const specialChars = '(!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~)'
   return (
     <>
       <div className="background">
@@ -71,20 +72,16 @@ function Signup({
                   onChange={passwordChange}
                 />
                 <Message size="tiny">
-                  <MessageHeader>Password must contain the following:</MessageHeader>
+                  <MessageHeader>
+                    Password must contain the following:
+                  </MessageHeader>
                   <MessageList>
+                    <MessageItem>6 to 16 characters in length</MessageItem>
+                    <MessageItem>At least 1 upper case letter</MessageItem>
+                    <MessageItem>At least 1 number</MessageItem>
                     <MessageItem>
-                      6 to 16 characters in length
-                    </MessageItem>
-                    <MessageItem>
-                      At least 1 upper case letter
-                    </MessageItem>
-                    <MessageItem>
-                      At least 1 number
-                    </MessageItem>
-                    <MessageItem>
-                      {/* eslint-disable-next-line react/no-unescaped-entities */}
-                      At least 1 special character of (!@#$%^&*()_\-+=?/;:'"\\|~`.)
+                      At least 1 special character of
+                      {specialChars}
                     </MessageItem>
                   </MessageList>
                 </Message>
@@ -95,10 +92,11 @@ function Signup({
         </Grid>
       </div>
     </>
-  );
+  )
 }
 
 Signup.propTypes = {
+  createUserErr: PropTypes.func.isRequired,
   handleSignup: PropTypes.func.isRequired,
   errorMsg: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
@@ -109,6 +107,6 @@ Signup.propTypes = {
   emailChange: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   passwordChange: PropTypes.func.isRequired,
-};
+}
 
-export default Signup;
+export default Signup

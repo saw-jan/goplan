@@ -1,21 +1,21 @@
-import { API_ROOT_URL } from '../constants';
+import { API_ROOT_URL } from '../constants'
 
-export const LOGIN_URL = `${API_ROOT_URL}/users/login`;
-export const CREATE_USER_URL = `${API_ROOT_URL}/users/create`;
-const MAX_NAME_LEN = 30;
-const MAX_PW_LEN = 16;
-const MIN_PW_LEN = 6;
+export const LOGIN_URL = `${API_ROOT_URL}/users/login`
+export const CREATE_USER_URL = `${API_ROOT_URL}/users/create`
+const MAX_NAME_LEN = 30
+const MAX_PW_LEN = 16
+const MIN_PW_LEN = 6
 
 export const LOGIN_STATUSES = {
   SUCCESS: 'SUCCESS',
   PENDING: 'PENDING',
   FAILED: 'FAILED',
-};
+}
 export const CREATE_USER_STATUSES = {
   SUCCESS: 'SUCCESS',
   PENDING: 'PENDING',
   FAILED: 'FAILED',
-};
+}
 
 export const CREATE_USER_ERROR_MESSAGES = {
   SERVER_ERROR: 'Undefined server Error.',
@@ -40,7 +40,7 @@ export const CREATE_USER_ERROR_MESSAGES = {
   PASSWORD_MISSING_CHARS:
     'Sign up failed. Password must contain 1 upper-case, ' +
     '1 lower-case, and 1 special character (,.!@#$).',
-};
+}
 
 export const USER_SERVER_ERRORS = {
   SERVER_ERROR: 'Undefined server Error.',
@@ -52,13 +52,13 @@ export const USER_SERVER_ERRORS = {
   CREDENTIALS_MISSING:
     'credentials is of incorrect type in request body. object should have email, password',
   INCORRECT_PW: 'Password is incorrect for given email',
-};
+}
 
 export const LOGIN_ERROR_MESSAGE = {
   USER_NOT_FOUND: 'Email or Password is incorrect.',
   INCORRECT_PW: 'Email or Password is incorrect.',
   CREDENTIALS_MISSING: 'Please enter a Email or Password.',
   SERVER_ERROR: 'Undefined server Error.',
-};
+}
 
-export const JWT_TOKEN = 'jwtToken';
+export const JWT_TOKEN = 'jwtToken'

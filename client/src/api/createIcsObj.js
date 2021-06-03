@@ -9,10 +9,10 @@
  */
 function createIcsObj(eventObject) {
   const { name, description, location, startDateTime, endDateTime } =
-    eventObject;
+    eventObject
 
-  const start = new Date(startDateTime);
-  const end = new Date(endDateTime);
+  const start = new Date(startDateTime)
+  const end = new Date(endDateTime)
 
   const icsObject = {
     // eslint-disable-next-line max-len
@@ -33,9 +33,9 @@ function createIcsObj(eventObject) {
     title: name,
     description,
     location,
-  };
+  }
 
-  return icsObject;
+  return icsObject
 }
 
-export default createIcsObj;
+export default createIcsObj
