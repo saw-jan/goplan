@@ -19,6 +19,7 @@ function Login({
   password,
   handlePassChange,
   handleLogin,
+  resetCreateStatus,
 }) {
   return (
     <>
@@ -73,7 +74,13 @@ function Login({
               <Button onClick={handleLogin} width={100}>
                 Log In
               </Button>
-              <Button as={NavLink} exact to="/signup" width={100}>
+              <Button
+                onClick={resetCreateStatus}
+                as={NavLink}
+                exact
+                to="/signup"
+                width={100}
+              >
                 Sign up
               </Button>
             </Form>
@@ -92,6 +99,7 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   handlePassChange: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
+  resetCreateStatus: PropTypes.func.isRequired,
 }
 
 export default Login

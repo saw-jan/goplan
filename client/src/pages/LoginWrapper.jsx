@@ -31,8 +31,12 @@ function LoginWrapper() {
     setPassword(e.target.value)
   }
 
+  const resetCreateStatus = () => {
+    return dispatch(setCreateUserStatus(null))
+  }
+
   const handleLogin = () => {
-    dispatch(setCreateUserStatus(null))
+    resetCreateStatus()
     loginRequest(email, password)
   }
 
@@ -49,6 +53,7 @@ function LoginWrapper() {
       handleLogin={handleLogin}
       password={password}
       handlePassChange={handlePassChange}
+      resetCreateStatus={resetCreateStatus}
     />
   )
 }
