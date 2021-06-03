@@ -1,7 +1,7 @@
 import { API_ROOT_URL } from '../constants'
 
 export const LOGIN_URL = `${API_ROOT_URL}/users/login`
-export const CREATE_USER_URL = `${API_ROOT_URL}/users/create`
+export const CREATE_USER_URL = `${API_ROOT_URL}/users`
 const MAX_NAME_LEN = 30
 const MAX_PW_LEN = 16
 const MIN_PW_LEN = 6

@@ -8,6 +8,7 @@ import {
   findOne as findUser,
   UserExists,
   UserNotFound,
+  deleteOne as deleteUser,
 } from '../models/User'
 import hasShape from '../tools/hasShape'
 
@@ -67,6 +68,23 @@ export async function create(req: Request, res: Response): Promise<Response> {
       return res.status(400).json({ error: ERROR_MSGS.USER_EXISTS })
     }
     return res.status(400).json({ error: ERROR_MSGS.SERVER_ERROR })
+  }
+}
+
+export async function remove(req: Request, res: Response): Promise<Response> {
+  const user = req.body
+
+  if (typeof user !== 'object' || !('email' in user))
+    return res.status(400).json({ error: 'Email is required' })
+
+  try {
+    await deleteUser(user)
+    return res.status(200).json({ message: 'User deleted' })
+  } catch (e) {
+    let err = ERROR_MSGS.SERVER_ERROR
+    if (typeof e === 'object' && 'message' in e) err = e.message
+
+    return res.status(400).json({ error: err })
   }
 }
 

@@ -1,6 +1,10 @@
 import { getDb } from '../db'
 import { QueryError } from './errors'
-import { InsertOneWriteOpResult, ObjectID } from 'mongodb'
+import {
+  InsertOneWriteOpResult,
+  ObjectID,
+  DeleteWriteOpResultObject,
+} from 'mongodb'
 import hasShape from '../tools/hasShape'
 
 const USERS = 'users' // collection name
@@ -89,6 +93,27 @@ export async function insertOne(user: IUser): Promise<IUser> {
     throw new QueryError()
   }
   return queryResult.ops[0]
+}
+
+export async function deleteOne(user: IUser): Promise<any> {
+  const db = getDb()
+  let queryResult: DeleteWriteOpResultObject
+  let foundUser: IUser | null
+
+  try {
+    foundUser = await findOne({ email: user.email })
+  } catch (e) {
+    throw e
+  }
+
+  try {
+    queryResult = await db.collection(USERS).deleteOne(user)
+  } catch (e) {
+    throw new QueryError()
+  }
+  if (queryResult.deletedCount !== 1) {
+    throw new QueryError()
+  }
 }
 
 export async function find(filter: IUserQueryFilter): Promise<IUser[]> {

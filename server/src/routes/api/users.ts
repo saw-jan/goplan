@@ -1,21 +1,19 @@
 import Express from 'express'
-import { create, login, getAll } from '../../controllers/users'
+import { create, remove, login, getAll } from '../../controllers/users'
 import protectController from '../../middleware/protectController'
 
 const router = Express.Router()
 
-const USERS = 'users'
-
-const ROOT_PATH = `/${USERS}`
+const USERS = '/users'
 
 export const PATHS = {
-  CREATE: `${ROOT_PATH}/create`,
-  LOGIN: `${ROOT_PATH}/login`,
-  GET_ALL: `${ROOT_PATH}/get-all`,
+  LOGIN: `${USERS}/login`,
+  GET_ALL: `${USERS}/get-all`,
 }
 
-router.post(PATHS.CREATE, create)
+router.post(USERS, create)
 router.post(PATHS.GET_ALL, protectController(getAll, true))
 router.post(PATHS.LOGIN, login)
+router.delete(USERS, remove)
 
 export default router
