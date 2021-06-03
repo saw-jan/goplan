@@ -12,7 +12,12 @@ export const ERRORS = {
 
 const DEFAULT_METHOD = 'POST';
 
-export async function request(url, body, headers=DEFAULT_HEADERS, method=DEFAULT_METHOD) {
+export async function request(
+  url,
+  body,
+  headers = DEFAULT_HEADERS,
+  method = DEFAULT_METHOD
+) {
   if (method === 'POST' && headers['content-type'] === 'application/json') {
     // eslint-disable-next-line no-param-reassign
     body = JSON.stringify(body);
@@ -28,7 +33,12 @@ export async function request(url, body, headers=DEFAULT_HEADERS, method=DEFAULT
 }
 
 // eslint-disable-next-line max-len
-export async function protectedRequest(url, body, headers = DEFAULT_HEADERS, method = DEFAULT_HEADERS) {
+export async function protectedRequest(
+  url,
+  body,
+  headers = DEFAULT_HEADERS,
+  method = DEFAULT_HEADERS
+) {
   const token = getJwtToken();
   if (!token) {
     throw ERRORS.NO_TOKEN_FOUND;

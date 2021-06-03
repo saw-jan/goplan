@@ -3,7 +3,7 @@ import createIcs from './createIcsObj';
 
 function downloadMultiIcsEvent(eventObjs, fileName) {
   const icsObjects = eventObjs.map((eventObj) => {
-      return createIcs(eventObj);
+    return createIcs(eventObj);
   });
 
   ics.createEvents(icsObjects, (error, fileContents) => {

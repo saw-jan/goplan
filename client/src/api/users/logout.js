@@ -1,6 +1,6 @@
-import store from '../../store';
-import { unsetUser } from '../../store/action-creators/user';
-import { setJwtToken } from "./jwt";
+import store from 'src/store';
+import { unsetUser } from 'src/store/action-creators/user';
+import { setJwtToken } from './jwt';
 
 function logout() {
   store.dispatch(unsetUser());

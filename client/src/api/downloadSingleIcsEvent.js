@@ -2,7 +2,6 @@ import createIcsObj from './createIcsObj';
 import * as ics from 'ics';
 
 function downloadSingleIcsEvent(eventObj) {
-
   const icsObj = createIcsObj(eventObj);
 
   ics.createEvent(icsObj, (error, fileContents) => {

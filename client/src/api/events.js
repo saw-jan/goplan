@@ -7,13 +7,6 @@ import { API_ROOT_URL } from './constants';
 export const GET_EVENTS_URL = `${API_ROOT_URL}/events/get`;
 export const CREATE_EVENT_URL = `${API_ROOT_URL}/events/create`;
 
-const ERRORS = {
-  INVALID_NAME: new Error('Invalid name'),
-  INVALID_LOCATION: new Error('Invalid location'),
-  INVALID_START_DT: new Error('Invalid start datetime'),
-  INVALID_END_DT: new Error('Invalid end datetime'),
-};
-
 /**
  * gets all events
  * @returns {Promise<[{
@@ -52,15 +45,6 @@ const ERRORS = {
  * }>}
  */
 export async function createEvent(eventObj) {
-  const {
-    name,
-    description,
-    location,
-    startDateTime,
-    endDateTime,
-  } = eventObj;
-
-
   let jsonResp;
   try {
     const resp = await fetch(CREATE_EVENT_URL, {

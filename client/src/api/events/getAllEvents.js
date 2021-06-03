@@ -1,8 +1,8 @@
 import { getJwtToken } from '../users/jwt';
-import store from '../../store';
+import store from 'src/store';
 import { GET_EVENTS_URL } from './constants';
-import { setAllEvents } from '../../store/action-creators/events';
-import getDateString from "./getDateString";
+import { setAllEvents } from 'src/store/action-creators/events';
+import getDateString from './getDateString';
 /**
  *
  * @param eventObj {{startDateTime: *, name: *, description: *, location: *, endDateTime: *}}
@@ -13,7 +13,7 @@ async function getAllEvents() {
   let jsonResp = null;
 
   if (!user) {
-    return
+    return;
   }
 
   const id = user.id;

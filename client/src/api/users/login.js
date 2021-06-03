@@ -1,8 +1,15 @@
 import {
-  LOGIN_STATUSES, LOGIN_URL, USER_SERVER_ERRORS, LOGIN_ERROR_MESSAGE,
+  LOGIN_STATUSES,
+  LOGIN_URL,
+  USER_SERVER_ERRORS,
+  LOGIN_ERROR_MESSAGE,
 } from './constants';
-import store from '../../store';
-import { setLoginStatus, setLoginErrorMsg, setUser } from '../../store/action-creators/user';
+import store from 'src/store';
+import {
+  setLoginStatus,
+  setLoginErrorMsg,
+  setUser,
+} from 'src/store/action-creators/user';
 import { decodeToken, setJwtToken } from './jwt';
 
 export default async function login(email, password) {
@@ -42,7 +49,9 @@ export default async function login(email, password) {
         return;
       case USER_SERVER_ERRORS.CREDENTIALS_MISSING:
         store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
-        store.dispatch(setLoginErrorMsg(LOGIN_ERROR_MESSAGE.CREDENTIALS_MISSING));
+        store.dispatch(
+          setLoginErrorMsg(LOGIN_ERROR_MESSAGE.CREDENTIALS_MISSING)
+        );
         return;
       default:
         store.dispatch(setLoginStatus(LOGIN_STATUSES.FAILED));
@@ -65,14 +74,16 @@ export default async function login(email, password) {
     return;
   }
 
-  store.dispatch(setUser({
-    // eslint-disable-next-line no-underscore-dangle
-    id: decodedToken._id,
-    firstName: decodedToken.firstName,
-    lastName: decodedToken.lastName,
-    email: decodedToken.email,
-    isAdmin: decodedToken.isAdmin,
-  }));
+  store.dispatch(
+    setUser({
+      // eslint-disable-next-line no-underscore-dangle
+      id: decodedToken._id,
+      firstName: decodedToken.firstName,
+      lastName: decodedToken.lastName,
+      email: decodedToken.email,
+      isAdmin: decodedToken.isAdmin,
+    })
+  );
   store.dispatch(setLoginErrorMsg(null));
   store.dispatch(setLoginStatus(LOGIN_STATUSES.SUCCESS));
   setJwtToken(jwtToken);

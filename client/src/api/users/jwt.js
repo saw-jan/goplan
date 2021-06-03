@@ -15,7 +15,6 @@ export function getJwtToken() {
   return token;
 }
 
-
 export function decodeToken(token) {
   return jwtDecode(token);
 }

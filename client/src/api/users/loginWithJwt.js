@@ -1,6 +1,6 @@
 import { decodeToken, getJwtToken } from './jwt';
-import store from '../../store';
-import { setLoginStatus, setUser } from '../../store/action-creators/user';
+import store from 'src/store';
+import { setLoginStatus, setUser } from 'src/store/action-creators/user';
 import { LOGIN_STATUSES } from './constants';
 
 export default function loginWithJwt() {
@@ -15,14 +15,15 @@ export default function loginWithJwt() {
     return;
   }
 
-  store.dispatch(setUser({
-    // eslint-disable-next-line no-underscore-dangle
-    id: decodedToken._id,
-    firstName: decodedToken.firstName,
-    lastName: decodedToken.lastName,
-    email: decodedToken.email,
-    isAdmin: decodedToken.isAdmin,
-  }));
+  store.dispatch(
+    setUser({
+      // eslint-disable-next-line no-underscore-dangle
+      id: decodedToken._id,
+      firstName: decodedToken.firstName,
+      lastName: decodedToken.lastName,
+      email: decodedToken.email,
+      isAdmin: decodedToken.isAdmin,
+    })
+  );
   store.dispatch(setLoginStatus(LOGIN_STATUSES.SUCCESS));
-
 }
