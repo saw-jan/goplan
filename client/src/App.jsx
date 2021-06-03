@@ -2,7 +2,7 @@
  * Main entry point of application.
  * Contains the routing logic for app.
  * Also initializes the redux store.
-*/
+ */
 
 import React from 'react';
 import { Route, HashRouter as Router, Switch } from 'react-router-dom';
@@ -19,15 +19,14 @@ import store from './store';
 // jwt token saved in local storage.
 loginWithJwt();
 
-
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/dashboard" component={MainCalendar} />
-          <Route path="/Signup" component={Signup} />
+          <Route exact path='/' component={Login} />
+          <Route exact path='/dashboard' component={MainCalendar} />
+          <Route path='/signup' component={Signup} />
         </Switch>
       </Router>
     </Provider>
