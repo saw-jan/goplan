@@ -20,20 +20,9 @@ function cleanUpDB() {
     db.collection('events').drop(function (e, res) {
       if (res) console.log('Events collection cleared')
     })
+
+    db.close()
   })
 }
-
-process.on('SIGINT', function () {
-  client.close(function () {
-    console.log('Mongodb disconnected')
-    process.exit(0)
-  })
-})
-process.on('SIGTERM', function () {
-  client.close(function () {
-    console.log('Mongodb disconnected')
-    process.exit(0)
-  })
-})
 
 module.exports = { cleanUpDB }
