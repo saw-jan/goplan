@@ -1,30 +1,39 @@
-const { MongoClient } = require('mongodb');
-const mongoUrl = 'mongodb://127.0.0.1:27017/goplan';
-const DB_NAME = 'goplan';
-const dbOptions = { useUnifiedTopology: true };
+const { MongoClient } = require('mongodb')
+const mongoUrl = 'mongodb://127.0.0.1:27017/goplan'
+const DB_NAME = 'goplan'
+const dbOptions = { useUnifiedTopology: true }
+
+const client = new MongoClient(mongoUrl, dbOptions)
 
 function cleanUpDB() {
-  const client = new MongoClient(mongoUrl, dbOptions);
-
   client.connect(function (err, client) {
-    if (err) throw err;
+    if (err) throw err
 
-    const db = client.db(DB_NAME);
+    const db = client.db(DB_NAME)
 
     // drop users collection
     db.collection('users').drop(function (e, res) {
-      if (e) throw err;
-      if (res) console.log('Users collection cleared');
-      db.close;
-    });
+      if (res) console.log('Users collection cleared')
+    })
 
     // drop events collection
     db.collection('events').drop(function (e, res) {
-      if (e) throw err;
-      if (res) console.log('Events collection cleared');
-      db.close;
-    });
-  });
+      if (res) console.log('Events collection cleared')
+    })
+  })
 }
 
-module.exports = { cleanUpDB };
+process.on('SIGINT', function () {
+  client.close(function () {
+    console.log('Mongodb disconnected')
+    process.exit(0)
+  })
+})
+process.on('SIGTERM', function () {
+  client.close(function () {
+    console.log('Mongodb disconnected')
+    process.exit(0)
+  })
+})
+
+module.exports = { cleanUpDB }

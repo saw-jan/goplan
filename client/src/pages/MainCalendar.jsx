@@ -54,7 +54,7 @@ function MainCalendar() {
             floated="right"
             size="small"
           />
-          <CreateEventWrapper />
+          {/* <CreateEventWrapper /> */}
         </Sidebar>
         <Sidebar
           as={Menu}
@@ -98,7 +98,7 @@ function MainCalendar() {
 }
 
 MainCalendar.propTypes = {
-  handleClosePanel: PropTypes.func.isRequired,
+  handleClosePanel: PropTypes.func.isquired,
   showPanel: PropTypes.bool.isRequired,
   calendarSize: PropTypes.number.isRequired,
   handleShowPanel: PropTypes.func.isRequired,
