@@ -21,7 +21,7 @@ function cleanUpDB() {
       if (res) console.log('Events collection cleared')
     })
 
-    db.close()
+    client.close()
   })
 }
 

@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types'
 import {
   Form,
-  Label,
   Grid,
-  Header,
   Message,
   MessageHeader,
   MessageList,
@@ -28,11 +26,11 @@ function Signup({
   const specialChars = '(!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~)'
   return (
     <>
-      <div className="background">
+      <div className="background go-bg">
         <Grid centered columns={2}>
           <Grid.Row>
             <Form
-              size="medium"
+              size="small"
               key="small"
               onSubmit={handleSignup}
               className="go-form signup"
@@ -114,9 +112,9 @@ function Signup({
 }
 
 Signup.propTypes = {
-  createUserErr: PropTypes.func.isRequired,
+  createUserErr: PropTypes.func,
   handleSignup: PropTypes.func.isRequired,
-  errorMsg: PropTypes.string.isRequired,
+  errorMsg: PropTypes.string,
   firstName: PropTypes.string.isRequired,
   firstNameChange: PropTypes.func.isRequired,
   lastName: PropTypes.string.isRequired,

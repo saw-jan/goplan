@@ -34,9 +34,8 @@ function MainCalendar() {
   getAllEvents()
 
   return (
-    <>
+    <div className="cal-wrapper">
       <NavBar />
-
       <Sidebar.Pushable as={Segment}>
         <Sidebar
           as={Menu}
@@ -54,7 +53,7 @@ function MainCalendar() {
             floated="right"
             size="small"
           />
-          {/* <CreateEventWrapper /> */}
+          <CreateEventWrapper />
         </Sidebar>
         <Sidebar
           as={Menu}
@@ -73,8 +72,8 @@ function MainCalendar() {
             size="small"
           />
           <GetEvents />
+          hi
         </Sidebar>
-
         <Sidebar.Pusher>
           <div className="background">
             <Grid>
@@ -93,15 +92,10 @@ function MainCalendar() {
           </div>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
-    </>
+    </div>
   )
 }
 
-MainCalendar.propTypes = {
-  handleClosePanel: PropTypes.func.isquired,
-  showPanel: PropTypes.bool.isRequired,
-  calendarSize: PropTypes.number.isRequired,
-  handleShowPanel: PropTypes.func.isRequired,
-}
+MainCalendar.propTypes = {}
 
 export default MainCalendar

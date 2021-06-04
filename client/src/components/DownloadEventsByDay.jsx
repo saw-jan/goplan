@@ -14,6 +14,6 @@ function DownloadEventsByDay({ events }) {
 }
 
 DownloadEventsByDay.propTypes = {
-  events: PropTypes.func.isRequired,
+  events: PropTypes.any.isRequired,
 }
 export default DownloadEventsByDay

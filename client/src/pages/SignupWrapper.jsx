@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import createUserRequest from 'src/api/users/createUser'
 import { CREATE_USER_ERROR_MESSAGES } from 'src/api/users/constants'

@@ -1,14 +1,6 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import {
-  Form,
-  Button,
-  Label,
-  Header,
-  Message,
-  Image,
-  Grid,
-} from 'semantic-ui-react'
+import { Form, Button, Header, Message, Grid } from 'semantic-ui-react'
 import 'src/css/style.css'
 
 function Login({
@@ -23,8 +15,8 @@ function Login({
 }) {
   return (
     <>
-      <div className="background">
-        <Grid centered columns={1}>
+      <div className="background go-bg">
+        <Grid centered columns={1} className="grid-login">
           <Grid.Row style={{ marginTop: '100px' }}>
             <Grid.Column>
               <Header as="h1" textAlign="center">
@@ -33,7 +25,7 @@ function Login({
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Form size="medium" key="small" className="go-form login">
+            <Form size="small" key="small" className="go-form login">
               <Grid.Row style={{ marginBottom: '30px', textAlign: 'left' }}>
                 <h2>Login</h2>
                 <div className="go-divider"></div>
@@ -89,7 +81,7 @@ function Login({
 }
 
 Login.propTypes = {
-  loginErrorMsg: PropTypes.string.isRequired,
+  loginErrorMsg: PropTypes.string,
   createUserStatus: PropTypes.string,
   email: PropTypes.string.isRequired,
   handleEmailChange: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
 import { SET_SELECTED_DATE } from '../action-creators/calendar'
 
 const defaultState = {
-  selectedDate: null,
+  selectedDate: '',
 }
 
 export default function calendarReducer(state = defaultState, action) {

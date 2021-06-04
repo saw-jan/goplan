@@ -38,7 +38,7 @@ function CreateEventWrapper() {
 
   useEffect(() => {
     setEventFields({ ...eventFields, userId: userObj.id })
-  }, [userObj, eventFields, setEventFields])
+  }, [userObj, setEventFields])
 
   const eventFieldHandler = (event, { name, value }) => {
     dispatch(setCreateEventErrorMsg(null))

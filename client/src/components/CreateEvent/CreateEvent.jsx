@@ -107,11 +107,11 @@ CreateEvent.propTypes = {
     date: PropTypes.string,
     startTime: PropTypes.string,
     endTime: PropTypes.string,
-    recurrenceType: PropTypes.array,
+    recurrenceType: PropTypes.string,
   }).isRequired,
   eventFieldHandler: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   errorMsg: PropTypes.string,
-  recurringOptions: PropTypes.object,
+  recurringOptions: PropTypes.array,
 }
 export default CreateEvent
