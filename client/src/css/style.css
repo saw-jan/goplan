@@ -133,3 +133,28 @@ body > #root {
   background: rgb(17, 122, 163);
   color: #fff;
 }
+
+.background .go-calender {
+  margin-top: 5px;
+}
+
+.panelStyle .event-form {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: stretch;
+}
+
+.panelStyle .event-form .row > * {
+  width: 100%;
+}
+
+.panelStyle .event-form .form {
+  text-align: left;
+}
+
+.panelStyle .event-form .btn-row > button {
+  background: rgb(17, 122, 163);
+  color: #fff;
+}

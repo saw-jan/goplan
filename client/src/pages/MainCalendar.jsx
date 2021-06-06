@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Button, Grid, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Button, Grid, Menu, Segment, Sidebar, Icon } from 'semantic-ui-react'
 import Calendar from 'src/components/Calendar'
 import NavBar from 'src/components/NavBar'
 import CreateEventWrapper from 'src/components/CreateEvent/CreateEventWrapper'
@@ -13,7 +13,7 @@ import 'src/css/style.css'
 function MainCalendar() {
   const [showPanelCreate, setShowPanelCreate] = useState(false)
   const [calendarSize, setCalendarSize] = useState(15)
-  const [buttonSize, setButtonSize] = useState(3)
+  const [isSideBar, setIsSideBar] = useState(false)
   const getPanelStatus = useSelector((state) => state.panel.getEventsPanel)
   const dispatch = useDispatch()
 
@@ -21,14 +21,14 @@ function MainCalendar() {
     setShowPanelCreate(false)
     dispatch(setGetEventsPanel(false))
     setCalendarSize(15)
-    setButtonSize(3)
+    setIsSideBar(false)
   }
 
   const handleShowPanel = () => {
     setShowPanelCreate(true)
     dispatch(setGetEventsPanel(false))
     setCalendarSize(11)
-    setButtonSize(1)
+    setIsSideBar(true)
   }
 
   getAllEvents()
@@ -48,7 +48,7 @@ function MainCalendar() {
           <Button
             compact
             basic
-            icon="window close"
+            icon="close"
             onClick={handleClosePanel}
             floated="right"
             size="small"
@@ -63,25 +63,25 @@ function MainCalendar() {
           vertical
           visible={getPanelStatus}
         >
-          <Button
-            compact
-            basic
-            icon="window close"
-            onClick={handleClosePanel}
-            floated="right"
-            size="small"
-          />
           <GetEvents />
-          hi
         </Sidebar>
         <Sidebar.Pusher>
           <div className="background">
-            <Grid>
+            <Grid className="go-calender">
               <Grid.Row>
-                <Grid.Column width={buttonSize}>
-                  <Button onClick={handleShowPanel}>createevents</Button>
+                <Grid.Column>
+                  {isSideBar ? (
+                    <Button onClick={handleShowPanel}>
+                      <Icon name="plus" size="small" />
+                      <span>Create Event</span>
+                    </Button>
+                  ) : (
+                    <Button onClick={handleShowPanel}>
+                      <Icon name="plus" size="small" />
+                      <span>Create Event</span>
+                    </Button>
+                  )}
                 </Grid.Column>
-                <Grid.Column width={11}></Grid.Column>
               </Grid.Row>
               <Grid.Row>
                 <Grid.Column width={calendarSize}>
