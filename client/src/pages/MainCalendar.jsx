@@ -64,6 +64,15 @@ function MainCalendar() {
           vertical
           visible={getPanelStatus}
         >
+          <Button
+            compact
+            basic
+            icon="close"
+            onClick={handleClosePanel}
+            floated="right"
+            size="small"
+            title="Close"
+          />
           <GetEvents />
         </Sidebar>
         <Sidebar.Pusher>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Button, Header } from 'semantic-ui-react'
+import { Button, Header, Grid } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
 import downloadMultiIcsEvent from 'src/api/downloadMultiIcsEvent'
 import DownloadEventsByDay from './DownloadEventsByDay'
@@ -48,17 +48,19 @@ function GetEvents() {
   }
 
   return (
-    <>
-      <div className="panelStyle">
-        <Header>{selectedDate}</Header>
+    <Grid className="event-form">
+      <Grid.Row>
+        <Header style={{ margin: 0 }}>{selectedDate}</Header>
         {currentEvents.map((event) => (
           <EventCard event={event} key={event.name} />
         ))}
         <br />
-        <DownloadEventsByDay events={events} />
-        <Button onClick={handleDownloadEventsByDay}>Get events by day</Button>
-      </div>
-    </>
+        <Grid.Row className="btn-row">
+          <DownloadEventsByDay events={events} />
+          <Button onClick={handleDownloadEventsByDay}>Download All</Button>
+        </Grid.Row>
+      </Grid.Row>
+    </Grid>
   )
 }
 

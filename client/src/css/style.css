@@ -128,6 +128,14 @@ body > #root {
   min-width: 350px;
 }
 
+.btn-row {
+  display: flex;
+}
+
+.btn-row > * {
+  width: 100%;
+}
+
 .go-form .btn-row {
   display: flex;
   justify-content: stretch;
@@ -159,9 +167,19 @@ body > #root {
   margin-top: 5px;
 }
 
+.event-form {
+  text-align: left;
+  margin: 0 !important;
+  width: 100%;
+  padding: 0 20px !important;
+}
+.event-form > .row > * {
+  width: 100%;
+}
+
 .panelStyle .event-form {
   width: 100%;
-  padding: 0;
+  padding: 0 !important;
   margin: 0;
   display: flex;
   justify-content: stretch;
@@ -169,10 +187,6 @@ body > #root {
 
 .panelStyle .event-form .row > * {
   width: 100%;
-}
-
-.panelStyle .event-form .form {
-  text-align: left;
 }
 
 .panelStyle .event-form .btn-row > button {
