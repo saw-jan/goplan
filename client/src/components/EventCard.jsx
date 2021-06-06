@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Grid, Icon } from 'semantic-ui-react'
 import downloadSingleIcsEvent from 'src/api/downloadSingleIcsEvent'
+import deleteEventRequest from 'src/api/events/deleteEvent'
 
 export default function EventCard({ event }) {
   const startDate = new Date(event.startDateTime)
@@ -11,6 +12,10 @@ export default function EventCard({ event }) {
 
   function handleDownload() {
     downloadSingleIcsEvent(event)
+  }
+
+  function handleDelete(event) {
+    deleteEventRequest(event)
   }
 
   return (
@@ -25,7 +30,12 @@ export default function EventCard({ event }) {
       <Card.Content extra textAlign="left">
         Time: {startTime} - {endTime}
       </Card.Content>
-      <Button onClick={handleDownload}>Download Event</Button>
+      <Grid.Row className="btn-row cal-card">
+        <Button onClick={handleDownload}>Export Event</Button>
+        <Button onClick={() => handleDelete(event)}>
+          <Icon name="trash alternate outline" size="big" />
+        </Button>
+      </Grid.Row>
     </Card>
   )
 }

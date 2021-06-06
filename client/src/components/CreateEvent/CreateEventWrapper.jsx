@@ -48,7 +48,6 @@ function CreateEventWrapper() {
   const onSubmit = () => {
     const fieldError = eventFieldsErrorCheck(eventFields)
     if (fieldError) {
-      console.log(fieldError)
       dispatch(setCreateEventErrorMsg(fieldError))
       return
     }

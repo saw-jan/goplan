@@ -12,12 +12,12 @@ export const CREATE_EVENT_ERROR_MESSAGES = {
     'missing props, or props have incorrect type in request body.',
 }
 
-export const CREATE_EVENT_STATUSES = {
+export const EVENT_STATUSES = {
   SUCCESS: 'SUCCESS',
   PENDING: 'PENDING',
   FAILED: 'FAILED',
 }
 
-export const CREATE_EVENT_URL = `${API_ROOT_URL}/events`
+export const EVENT_URL = `${API_ROOT_URL}/events`
 
 export const GET_EVENTS_URL = `${API_ROOT_URL}/events/get-by-user`

@@ -5,7 +5,7 @@
 import { API_ROOT_URL } from './constants'
 
 export const GET_EVENTS_URL = `${API_ROOT_URL}/events/get`
-export const CREATE_EVENT_URL = `${API_ROOT_URL}/events`
+export const EVENT_URL = `${API_ROOT_URL}/events`
 
 /**
  * gets all events
@@ -47,7 +47,7 @@ export const CREATE_EVENT_URL = `${API_ROOT_URL}/events`
 export async function createEvent(eventObj) {
   let jsonResp
   try {
-    const resp = await fetch(CREATE_EVENT_URL, {
+    const resp = await fetch(EVENT_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

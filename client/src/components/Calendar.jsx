@@ -9,7 +9,6 @@ function Calendar() {
   const dispatch = useDispatch()
 
   const dateHandler = (event, { value }) => {
-    console.log(value)
     const [day, month, year] = value.split('-')
     const dateObj = new Date()
     dateObj.setFullYear(year)

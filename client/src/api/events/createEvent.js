@@ -1,6 +1,6 @@
 import {
-  CREATE_EVENT_URL,
-  CREATE_EVENT_STATUSES,
+  EVENT_URL,
+  EVENT_STATUSES,
   CREATE_EVENT_ERRORS,
   CREATE_EVENT_ERROR_MESSAGES,
 } from './constants'
@@ -20,9 +20,9 @@ async function createEvent(eventObj) {
   const jwtToken = getJwtToken()
   let jsonResp
 
-  store.dispatch(setCreateEventStatus(CREATE_EVENT_STATUSES.PENDING))
+  store.dispatch(setCreateEventStatus(EVENT_STATUSES.PENDING))
   try {
-    const resp = await fetch(CREATE_EVENT_URL, {
+    const resp = await fetch(EVENT_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ async function createEvent(eventObj) {
 
     jsonResp = await resp.json()
   } catch (e) {
-    store.dispatch(setCreateEventStatus(CREATE_EVENT_STATUSES.FAILED))
+    store.dispatch(setCreateEventStatus(EVENT_STATUSES.FAILED))
     store.dispatch(setCreateEventErrorMsg(CREATE_EVENT_ERRORS.SERVER_ERROR))
     return
   }
@@ -43,13 +43,13 @@ async function createEvent(eventObj) {
   if (jsonResp.error) {
     switch (jsonResp.error) {
       case CREATE_EVENT_ERRORS.BAD_EVENT_GIVEN:
-        store.dispatch(setCreateEventStatus(CREATE_EVENT_STATUSES.FAILED))
+        store.dispatch(setCreateEventStatus(EVENT_STATUSES.FAILED))
         store.dispatch(
           setCreateEventErrorMsg(CREATE_EVENT_ERROR_MESSAGES.BAD_EVENT_GIVEN)
         )
         return
       default:
-        store.dispatch(setCreateEventStatus(CREATE_EVENT_STATUSES.FAILED))
+        store.dispatch(setCreateEventStatus(EVENT_STATUSES.FAILED))
         store.dispatch(
           setCreateEventErrorMsg(CREATE_EVENT_ERROR_MESSAGES.SERVER_ERROR)
         )
@@ -58,11 +58,11 @@ async function createEvent(eventObj) {
   }
 
   if (!jsonResp.event) {
-    store.dispatch(setCreateEventStatus(CREATE_EVENT_STATUSES.FAILED))
+    store.dispatch(setCreateEventStatus(EVENT_STATUSES.FAILED))
     store.dispatch(setCreateEventErrorMsg(CREATE_EVENT_ERRORS.SERVER_ERROR))
     return
   }
-  store.dispatch(setCreateEventStatus(CREATE_EVENT_STATUSES.SUCCESS))
+  store.dispatch(setCreateEventStatus(EVENT_STATUSES.SUCCESS))
   store.dispatch(setCreateEventErrorMsg(null))
   store.dispatch(setCreatedEvent(jsonResp.event))
 }

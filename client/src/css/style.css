@@ -136,6 +136,30 @@ body > #root {
   width: 100%;
 }
 
+.btn-row.cal-card > button:first-child {
+  margin: 0;
+  flex: 4;
+}
+
+.btn-row.cal-card > button:last-child {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.6rem;
+  background: rgb(206, 49, 49);
+  color: #fff;
+}
+
+.btn-row.cal-card > button:last-child:hover {
+  background: rgb(175, 38, 38);
+}
+
+.btn-row.cal-card > button:last-child > * {
+  margin: 0 !important;
+}
+
 .go-form .btn-row {
   display: flex;
   justify-content: stretch;

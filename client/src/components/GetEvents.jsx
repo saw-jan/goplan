@@ -55,9 +55,10 @@ function GetEvents() {
           <EventCard event={event} key={event.name} />
         ))}
         <br />
-        <Grid.Row className="btn-row">
+        <div className="go-divider" />
+        <Grid.Row className="btn-row" style={{ marginTop: '10px' }}>
           <DownloadEventsByDay events={events} />
-          <Button onClick={handleDownloadEventsByDay}>Download All</Button>
+          <Button onClick={handleDownloadEventsByDay}>Export All</Button>
         </Grid.Row>
       </Grid.Row>
     </Grid>
