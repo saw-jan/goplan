@@ -8,6 +8,7 @@ import CreateEventWrapper from 'src/components/CreateEvent/CreateEventWrapper'
 import GetEvents from 'src/components/GetEvents'
 import getAllEvents from 'src/api/events/getAllEvents'
 import { setGetEventsPanel } from 'src/store/action-types/panel'
+import { setCreateEventErrorMsg } from 'src/store/action-creators/events'
 import 'src/css/style.css'
 
 function MainCalendar() {
@@ -22,6 +23,7 @@ function MainCalendar() {
     dispatch(setGetEventsPanel(false))
     setCalendarSize(15)
     setIsSideBar(false)
+    dispatch(setCreateEventErrorMsg(''))
   }
 
   const handleShowPanel = () => {

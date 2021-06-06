@@ -5,6 +5,7 @@ import { setCreateEventErrorMsg } from 'src/store/action-creators/events'
 import CreateEvent from './CreateEvent'
 import eventFieldsErrorCheck from './eventFieldsErrorCheck'
 import buildEventObj from './buildEventObj'
+import { EVENT_STATUSES } from 'src/api/events/constants'
 
 const DEFAULT_EVENT_FIELDS = {
   name: '',
@@ -31,6 +32,7 @@ function CreateEventWrapper() {
   const userObj = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const errorMsg = useSelector((state) => state.events.createEventErrorMsg)
+  const createStatus = useSelector((state) => state.events.createEventStatus)
 
   useEffect(() => {
     setCreateEventErrorMsg(null)
@@ -55,6 +57,10 @@ function CreateEventWrapper() {
     const eventObj = buildEventObj(eventFields)
 
     createEventRequest(eventObj)
+
+    if (createStatus !== EVENT_STATUSES.SUCCESS) {
+      setEventFields(DEFAULT_EVENT_FIELDS)
+    }
   }
 
   return (
