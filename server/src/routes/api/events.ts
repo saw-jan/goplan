@@ -1,18 +1,21 @@
 import Express from 'express'
-import { createEvent, getUserEvents } from '../../controllers/events'
+import {
+  createEvent,
+  deleteEvent,
+  getUserEvents,
+} from '../../controllers/events'
 import protectController from '../../middleware/protectController'
 
 const router = Express.Router()
 
-const EVENTS = 'events'
-
-const ROOT_PATH = `/${EVENTS}`
+const EVENTS = '/events'
 
 export const PATHS = {
-  CREATE: `${ROOT_PATH}/create`,
-  GET_BY_USER: `${ROOT_PATH}/get-by-user`,
+  EVENTS: `${EVENTS}`,
+  GET_BY_USER: `${EVENTS}/get-by-user`,
 }
 
-router.post(PATHS.CREATE, protectController(createEvent, false))
+router.delete(PATHS.EVENTS, protectController(deleteEvent, false))
+router.post(PATHS.EVENTS, protectController(createEvent, false))
 router.post(PATHS.GET_BY_USER, protectController(getUserEvents, false))
 export default router

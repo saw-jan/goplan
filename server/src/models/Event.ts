@@ -1,6 +1,12 @@
 import { getDb } from '../db'
-import { findOne as findOneUser, UserNotFound } from './User'
-import { Cursor, InsertOneWriteOpResult, ObjectId, FilterQuery } from 'mongodb'
+import { findOne as findOneUser } from './User'
+import {
+  Cursor,
+  InsertOneWriteOpResult,
+  DeleteWriteOpResultObject,
+  ObjectID,
+  FilterQuery,
+} from 'mongodb'
 import { QueryError } from './errors'
 export { UserNotFound } from './User'
 
@@ -25,8 +31,8 @@ export enum Recurrences {
 }
 
 export interface IEvent {
-  _id?: string | ObjectId
-  userId: string | ObjectId
+  _id?: string | ObjectID
+  userId: string | ObjectID
   name: string
   description: string
   location: string
@@ -35,12 +41,49 @@ export interface IEvent {
   recurrenceType: Recurrences
 }
 
+export interface IEventQueryFilter {
+  _id?: string | ObjectID
+  userId?: string | ObjectID
+  name?: string
+  description?: string
+  location?: string
+  startDateTime?: string
+  endDateTime?: string
+  recurrenceType?: Recurrences
+}
+
+export class EventNotFound extends Error {
+  constructor() {
+    super('No event was found')
+  }
+}
+
+export async function findOne(filter: IEventQueryFilter): Promise<IEvent> {
+  let foundEvent: IEvent | null = null
+  const db = getDb()
+
+  if (filter._id && typeof filter._id === 'string') {
+    filter._id = new ObjectID(filter._id)
+  }
+
+  try {
+    foundEvent = await db.collection(EVENTS).findOne(filter)
+  } catch (e) {
+    throw new QueryError()
+  }
+
+  if (!foundEvent) {
+    throw new EventNotFound()
+  }
+  return foundEvent
+}
+
 export async function insertOne(event: IEvent): Promise<IEvent> {
   const db = getDb()
   let queryResult: InsertOneWriteOpResult<IEvent & { _id: string }>
 
   if (typeof event.userId === 'string') {
-    event.userId = new ObjectId(event.userId)
+    event.userId = new ObjectID(event.userId)
   }
 
   try {
@@ -60,6 +103,35 @@ export async function insertOne(event: IEvent): Promise<IEvent> {
   return queryResult.ops[0]
 }
 
+export async function deleteOne(event: IEvent): Promise<any> {
+  const db = getDb()
+  let queryResult: DeleteWriteOpResultObject
+
+  if (typeof event._id === 'string') {
+    event._id = new ObjectID(event._id)
+  }
+
+  if (typeof event.userId === 'string') {
+    event.userId = new ObjectID(event.userId)
+  }
+
+  try {
+    await findOne({ _id: event._id, userId: event.userId })
+  } catch (e) {
+    throw e
+  }
+
+  try {
+    queryResult = await db.collection(EVENTS).deleteOne(event)
+  } catch (e) {
+    throw new QueryError()
+  }
+
+  if (queryResult.deletedCount !== 1) {
+    throw new QueryError()
+  }
+}
+
 export async function findEvents(
   queryObject: FilterQuery<IEvent>
 ): Promise<IEvent[]> {
@@ -68,10 +140,10 @@ export async function findEvents(
   const db = getDb()
 
   if (typeof queryObject._id === 'string') {
-    queryObject = { ...queryObject, _id: new ObjectId(queryObject._id) }
+    queryObject = { ...queryObject, _id: new ObjectID(queryObject._id) }
   }
   if (typeof queryObject.userId === 'string') {
-    queryObject = { ...queryObject, userId: new ObjectId(queryObject.userId) }
+    queryObject = { ...queryObject, userId: new ObjectID(queryObject.userId) }
   }
   try {
     queryRes = await db.collection(EVENTS).find(queryObject)

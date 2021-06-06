@@ -18,6 +18,6 @@ export const CREATE_EVENT_STATUSES = {
   FAILED: 'FAILED',
 }
 
-export const CREATE_EVENT_URL = `${API_ROOT_URL}/events/create`
+export const CREATE_EVENT_URL = `${API_ROOT_URL}/events`
 
 export const GET_EVENTS_URL = `${API_ROOT_URL}/events/get-by-user`

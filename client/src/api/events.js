@@ -5,7 +5,7 @@
 import { API_ROOT_URL } from './constants'
 
 export const GET_EVENTS_URL = `${API_ROOT_URL}/events/get`
-export const CREATE_EVENT_URL = `${API_ROOT_URL}/events/create`
+export const CREATE_EVENT_URL = `${API_ROOT_URL}/events`
 
 /**
  * gets all events

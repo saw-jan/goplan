@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import * as Event from '../models/Event'
+import { insertOne, deleteOne } from '../models/Event'
 import { findEvents, IEvent } from '../models/Event'
 
 export const ERROR_MSGS = {
@@ -18,10 +18,27 @@ export async function createEvent(
   const event: IEvent = req.body.event
 
   try {
-    const newEvent = await Event.insertOne(event)
+    const newEvent = await insertOne(event)
     return res.status(200).json({ event: newEvent })
   } catch (e) {
     return res.status(400).json({ error: ERROR_MSGS.SERVER_ERROR })
+  }
+}
+
+export async function deleteEvent(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const event: IEvent = req.body
+
+  try {
+    await deleteOne(event)
+    return res.status(200).json({ message: 'Event deleted' })
+  } catch (e) {
+    let err = ERROR_MSGS.SERVER_ERROR
+    if (typeof e === 'object' && 'message' in e) err = e.message
+
+    return res.status(400).json({ error: err })
   }
 }
 
