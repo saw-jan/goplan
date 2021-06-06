@@ -4,34 +4,33 @@ const {
   BeforeAll,
   Before,
   After,
-} = require('@cucumber/cucumber');
+} = require('@cucumber/cucumber')
 const {
   startWebDriver,
   stopWebDriver,
   createSession,
   closeSession,
-} = require('nightwatch-api');
+} = require('nightwatch-api')
 
-const { cleanUpDB } = require('./tests/lib/index');
+const { cleanUpDB } = require('./tests/lib')
 
-setDefaultTimeout(60000);
+setDefaultTimeout(60000)
 
 // before the test run
 BeforeAll(async function () {
-  await startWebDriver({ env: 'chrome' });
-  await createSession();
-});
+  await startWebDriver({ env: 'chrome' })
+  await createSession()
+})
 
 // before every scenario
-Before(function () {});
+Before(function () {})
 
 // cleanup after every scenario
-After(function () {
-  cleanUpDB();
-});
+After(function () {})
 
 // after the whole test run
 AfterAll(async function () {
-  await closeSession();
-  await stopWebDriver();
-});
+  await closeSession()
+  await stopWebDriver()
+  cleanUpDB()
+})
