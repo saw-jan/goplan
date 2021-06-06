@@ -52,6 +52,7 @@ function MainCalendar() {
             onClick={handleClosePanel}
             floated="right"
             size="small"
+            title="Close"
           />
           <CreateEventWrapper />
         </Sidebar>

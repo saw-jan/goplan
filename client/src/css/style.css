@@ -10,7 +10,28 @@ body > #root {
   min-height: 5px;
   max-height: 5px;
   max-height: 30px;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
+}
+
+.navBarStyle .item {
+  padding: 10px !important;
+  margin: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBarStyle .item > * {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.navBarStyle .item:last-child {
+  padding-right: 20px !important;
+}
+
+.navBarStyle .sign-out {
+  font-size: 24px !important;
 }
 
 .contentNavBar {

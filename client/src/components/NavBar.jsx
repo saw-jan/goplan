@@ -7,14 +7,14 @@ function NavBar() {
     <>
       <Menu className="navBarStyle" secondary>
         <Menu.Item>
-          <Icon name="calendar" size="big" />
+          <Icon name="calendar alternate outline" size="big" />
         </Menu.Item>
         <Menu.Item className="contentNavBar">
-          <Header as="h3">Daikon Calendar</Header>
+          <Header as="h3">GoPlan</Header>
         </Menu.Item>
         <Menu.Menu position="right" className="logoutButton">
           <Menu.Item onClick={logout}>
-            <Header as="h3">Logout</Header>
+            <Icon name="sign-out" size="big" title="sign out" />
           </Menu.Item>
         </Menu.Menu>
       </Menu>
