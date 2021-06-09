@@ -16,21 +16,23 @@ const { cleanUpDB } = require('./tests/lib')
 
 setDefaultTimeout(60000)
 
-// before the test run
+// runs before the test run
 BeforeAll(async function () {
   await startWebDriver({ env: 'chrome' })
+})
+
+// runs before every scenario
+Before(async function () {
   await createSession()
 })
 
-// before every scenario
-Before(function () {})
-
-// cleanup after every scenario
-After(function () {})
-
-// after the whole test run
-AfterAll(async function () {
+// runs after every scenario
+After(async function () {
   await closeSession()
+})
+
+// runs after the whole test run
+AfterAll(async function () {
   await stopWebDriver()
   cleanUpDB()
 })
